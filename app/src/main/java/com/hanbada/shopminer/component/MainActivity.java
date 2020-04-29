@@ -2,16 +2,40 @@ package com.hanbada.shopminer.component;
 
 import android.os.Bundle;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.hanbada.shopminer.R;
-
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.MenuItem;
-import android.widget.TextView;
+import com.hanbada.shopminer.R;
+import com.hanbada.shopminer.adapters.OrderAdapter;
+import com.hanbada.shopminer.model.Order;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+import java.util.List;
+
+import viewmodel.OrderViewModel;
+
+public class MainActivity extends AppCompatActivity  {
+
+    ArrayList<Order> orderArrayList = new ArrayList<>() ;
+    OrderAdapter orderAdapter;
+    RecyclerView rvShopInfo;
+    OrderViewModel orderViewModel;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState); // test commit
+        setContentView(R.layout.activity_main);
+        //rvShopInfo = findViewById(R.id.rvShopInfo);
+
+        orderViewModel = ViewModelProviders.of(this).get(OrderViewModel.class);
+        orderViewModel.init();
+        /*orderViewModel.getOrderRepository().observe(this, orderResponse ->{
+            //List<Order> orders = orderResponse.get
+        });*/
+    }
+
+    /*
     private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -41,6 +65,6 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         mTextMessage = findViewById(R.id.message);
         navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
+    }*/
 
 }
